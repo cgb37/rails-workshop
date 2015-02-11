@@ -1,0 +1,289 @@
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "workshops"[0m
+  [1m[35m (0.3ms)[0m  SELECT "workshops"."title" FROM "workshops"
+
+
+Started GET "/" for 10.0.2.2 at 2015-02-11 15:07:37 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/gems/railties-4.2.0/lib/rails/templates/rails/welcome/index.html.erb (5.3ms)
+Completed 200 OK in 73ms (Views: 41.3ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateAdminUsers (20150211153220)
+  [1m[35m (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /vagrant/workshop_app/db/migrate/20150211153220_devise_create_admin_users.rb:40)
+  [1m[36m (39.8ms)[0m  [1mCREATE TABLE "admin_users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (31.0ms)[0m  CREATE UNIQUE INDEX  "index_admin_users_on_email" ON "admin_users"  ("email")
+  [1m[36m (17.3ms)[0m  [1mCREATE UNIQUE INDEX  "index_admin_users_on_reset_password_token" ON "admin_users"  ("reset_password_token")[0m
+  [1m[35mAdminUser Exists (6.3ms)[0m  SELECT  1 AS one FROM "admin_users" WHERE "admin_users"."email" = 'admin@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "admin_users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "admin@example.com"], ["encrypted_password", "$2a$10$nE01l7r9k3Ep0YVFfjOPYeQzNqUHSBJggn.6rRaQH83EKXTxL63QG"], ["created_at", "2015-02-11 15:32:58.908902"], ["updated_at", "2015-02-11 15:32:58.908902"]]
+  [1m[35mSQL (41.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150211153220"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateActiveAdminComments (20150211153223)
+  [1m[35m (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /vagrant/workshop_app/db/migrate/20150211153223_create_active_admin_comments.rb:9)
+  [1m[36m (5.7ms)[0m  [1mCREATE TABLE "active_admin_comments" ("id" serial primary key, "namespace" character varying, "body" text, "resource_id" character varying NOT NULL, "resource_type" character varying NOT NULL, "author_id" integer, "author_type" character varying, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.7ms)[0m  CREATE  INDEX  "index_active_admin_comments_on_namespace" ON "active_admin_comments"  ("namespace")
+  [1m[36m (2.0ms)[0m  [1mCREATE  INDEX  "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments"  ("author_type", "author_id")[0m
+  [1m[35m (2.3ms)[0m  CREATE  INDEX  "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments"  ("resource_type", "resource_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150211153223"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+Migrating to DeviseCreateUsers (20150211153233)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /vagrant/workshop_app/db/migrate/20150211153233_devise_create_users.rb:40)
+  [1m[35m (8.3ms)[0m  CREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.1ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (2.5ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["email", "admin@example.com"], ["encrypted_password", "$2a$10$SPy4D1Fth.wCu0l2cClEy.4/omfEio00XQNxNdDAo9hQGni9ivKnS"], ["created_at", "2015-02-11 15:32:59.076371"], ["updated_at", "2015-02-11 15:32:59.076371"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150211153233"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'active_admin_comments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.4ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'admin_users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.3ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'workshops'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/admin" for 10.0.2.2 at 2015-02-11 15:33:31 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 26ms
+
+
+Started GET "/admin/login" for 10.0.2.2 at 2015-02-11 15:33:31 +0000
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/devise/shared/_links.erb (4.8ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (202.0ms)
+WARNING: The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.
+         on line 410 of /home/vagrant/.rvm/gems/ruby-2.2.0/gems/bourbon-4.2.0/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss, in `box-sizing'
+         from line 81 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/components/_popovers.scss
+         from line 12 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/_base.scss
+         from line 12 of /vagrant/workshop_app/app/assets/stylesheets/active_admin.css.scss
+
+
+WARNING: The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.
+         on line 410 of /home/vagrant/.rvm/gems/ruby-2.2.0/gems/bourbon-4.2.0/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss, in `box-sizing'
+         from line 85 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/components/_popovers.scss
+         from line 12 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/_base.scss
+         from line 12 of /vagrant/workshop_app/app/assets/stylesheets/active_admin.css.scss
+
+
+WARNING: The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.
+         on line 410 of /home/vagrant/.rvm/gems/ruby-2.2.0/gems/bourbon-4.2.0/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss, in `box-sizing'
+         from line 109 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/components/_dropdown_menu.scss
+         from line 18 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/_base.scss
+         from line 12 of /vagrant/workshop_app/app/assets/stylesheets/active_admin.css.scss
+
+
+WARNING: The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.
+         on line 410 of /home/vagrant/.rvm/gems/ruby-2.2.0/gems/bourbon-4.2.0/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss, in `box-sizing'
+         from line 113 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/components/_dropdown_menu.scss
+         from line 18 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/_base.scss
+         from line 12 of /vagrant/workshop_app/app/assets/stylesheets/active_admin.css.scss
+
+
+WARNING: The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.
+         on line 410 of /home/vagrant/.rvm/gems/ruby-2.2.0/gems/bourbon-4.2.0/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss, in `box-sizing'
+         from line 4 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/structure/_title_bar.scss
+         from line 34 of /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/assets/stylesheets/active_admin/_base.scss
+         from line 12 of /vagrant/workshop_app/app/assets/stylesheets/active_admin.css.scss
+
+
+Completed 200 OK in 8800ms (Views: 8782.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/active_admin-8363570897ce353e17cfcf556c817a10.css?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/active_admin/print-6a2e634cda478026089b298fb6d959af.css?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/widget-320c0e6ab9d0ba9853aeac7cde601034.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/datepicker-46fef2bd08c7152eabb139e0fce7b289.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/core-290c80ecb8a0cc8abe3ce4c572428231.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-eb3e278249152b5b5d5170b73d9dbf52.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/button-2beb8f828ae2bf5bd866a1d49a961e89.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/mouse-ff2fbf51cc09ac75e71dfc85cd384590.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/draggable-9250c452292e1bd4057d39344ed9f6f2.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:40 +0000
+
+
+Started GET "/assets/jquery-ui/position-a246667f9ce1d2f29e825269f137af38.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/jquery-ui/resizable-4ceb16086b541dd8503b73ff1ebe634a.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/jquery-ui/dialog-c1fa41ba5b29b08fcab3fe60e7172348.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/jquery-ui/sortable-fd3842e48545c56fbd507aee96bb367d.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/jquery-ui/tabs-77d5968531a2f0c3e331c2b690c87826.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/jquery_ujs-0b8f09cf5aec4ba1be1abd9f915c77e2.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/base-7ac7a6fe66e550ae225c9a66f51e6403.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/batch_actions-9d98d7cf1f49cc2f494d6115d7097fe1.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler-5b99866d2a3755d78599c7ef4700ef4d.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu-47ba94bbafabd7c70c90ab7aba6ab49b.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/flash-977ddfc1a734c9e50e7d0c2d3af15d14.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/has_many-54702962e8fef0b2eedd2af90681c1a4.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/modal_dialog-f13deb4b26f91eba24bf9d635d68c54e.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/per_page-b1d97a79c912d2085d3971cc09e6927a.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/popover-cbb946556eca6cc675ed0a89ed2d1ddc.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler-f0fc7612f005a3d5a2cc8892039b9eed.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/ext/jquery-ui-00c454438ea743a97c0676f6037b7cd9.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/ext/jquery-4b28b832ea8e9b1086f94de24e19ef5d.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin/application-0c7ad6ed581d7b111e0d6f8db3ead943.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started GET "/assets/active_admin-3104684a6b6c7ef548c2c8de23c909cd.js?body=1" for 10.0.2.2 at 2015-02-11 15:33:41 +0000
+
+
+Started POST "/admin/login" for 10.0.2.2 at 2015-02-11 15:33:50 +0000
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sOFkTNkNyeMqN79IRmY8vLFXzose5O1py1LG4mOfLaI1ULLfyaFcXQtn9ZVuIhuAgvdvdpubqfUrQb9j98NwAg==", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["email", "admin@example.com"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = $7  [["last_sign_in_at", "2015-02-11 15:33:50.413313"], ["current_sign_in_at", "2015-02-11 15:33:50.413313"], ["last_sign_in_ip", "10.0.2.2/32"], ["current_sign_in_ip", "10.0.2.2/32"], ["sign_in_count", 1], ["updated_at", "2015-02-11 15:33:50.415397"], ["id", 1]]
+  [1m[36m (23.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 194ms (ActiveRecord: 24.3ms)
+
+
+Started GET "/admin" for 10.0.2.2 at 2015-02-11 15:33:50 +0000
+Processing by Admin::DashboardController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/page/index.html.arb (300.6ms)
+Completed 200 OK in 326ms (Views: 315.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/admin/users" for 10.0.2.2 at 2015-02-11 15:35:03 +0000
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "users" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" desc LIMIT 30 OFFSET 0
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/resource/index.html.arb (365.2ms)
+Completed 200 OK in 404ms (Views: 391.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/active_admin/orderable-92b68ae0bf160729319da0c727c039b1.png" for 10.0.2.2 at 2015-02-11 15:35:04 +0000
+
+
+Started GET "/assets/active_admin/datepicker/datepicker-input-icon-3d51969545a8ca7d40fca3ad4dbfa829.png" for 10.0.2.2 at 2015-02-11 15:35:04 +0000
+
+
+Started GET "/admin/comments" for 10.0.2.2 at 2015-02-11 15:35:06 +0000
+Processing by Admin::CommentsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."namespace" = $1  [["namespace", "admin"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "active_admin_comments" WHERE "active_admin_comments"."namespace" = $1 LIMIT 30 OFFSET 0) subquery_for_count[0m  [["namespace", "admin"]]
+  [1m[35m (0.3ms)[0m  SELECT DISTINCT "active_admin_comments"."resource_type" FROM "active_admin_comments"  ORDER BY resource_type asc
+  [1m[36m (0.3ms)[0m  [1mSELECT DISTINCT "active_admin_comments"."author_type" FROM "active_admin_comments"  ORDER BY author_type asc[0m
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/resource/index.html.arb (362.5ms)
+Completed 200 OK in 393ms (Views: 387.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/admin/admin_users" for 10.0.2.2 at 2015-02-11 15:35:08 +0000
+Processing by Admin::AdminUsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "admin_users"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mAdminUser Load (0.3ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users"  ORDER BY "admin_users"."id" desc LIMIT 30 OFFSET 0[0m
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/resource/index.html.arb (353.7ms)
+Completed 200 OK in 383ms (Views: 378.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/admin/dashboard" for 10.0.2.2 at 2015-02-11 15:35:13 +0000
+Processing by Admin::DashboardController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/vagrant/.rvm/gems/ruby-2.2.0/bundler/gems/active_admin-3f916d6bee73/app/views/active_admin/page/index.html.arb (271.3ms)
+Completed 200 OK in 286ms (Views: 283.6ms | ActiveRecord: 0.2ms)
